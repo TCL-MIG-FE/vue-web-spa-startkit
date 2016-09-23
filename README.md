@@ -15,8 +15,8 @@ npm run build           # 打包到static目录,同时在上级文件夹中生�
 
 ## 截图
 
-![截图](https://raw.githubusercontent.com/TCL-MIG-FE/vue-web-spa-startkit/master/screnshoots/1.png)
+![截图](https://raw.githubusercontent.com/TCL-MIG-FE/vue-web-spa-startkit/master/screenshoots/1.png)
 
-![截图](https://raw.githubusercontent.com/TCL-MIG-FE/vue-web-spa-startkit/master/screnshoots/2.png)
+![截图](https://raw.githubusercontent.com/TCL-MIG-FE/vue-web-spa-startkit/master/screenshoots/2.png)
 
 
