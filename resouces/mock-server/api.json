@@ -1,0 +1,107 @@
+{
+    "Demo": [
+        {
+            "url": "/admin/task/list",
+            "desc": "获取任务列表",
+            "mock": true,
+            "res": {
+                "code": 200,
+                "msg": "Get address successfully.",
+                "data": {
+                    "pageSize":10,
+                    "pageNo":2,
+                    "totalCount":92,
+                    "items|5-10": [
+                        {
+                            "processId|+1": 1,
+                            "title": "@cword(10,60)",
+                            "source": "@url",
+                            "content": "@cword(200,500)",
+                            "reward|1-20": 1,
+                            "status": "@pick(1,11,12)"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "url": "/admin/translate/view",
+            "desc": "获取翻译后的文章",
+            "mock": true,
+            "res": {
+                "code": 200,
+                "msg": "Get address successfully.",
+                "data": {
+                    "processId|+1": 1,
+                    "title": "@cword(20)",
+                    "content": "@cword(900)"
+                }
+            }
+        },
+
+        {
+            "url": "/admin/verify/list",
+            "desc": "获取翻译审核列表",
+            "mock": true,
+            "res": {
+                "code": 200,
+                "msg": "Get address successfully.",
+                "data": {
+                    "pageSize":10,
+                    "pageNo":3,
+                    "totalCount":52,
+                    "items|5-10": [
+                        {
+                            "processId|+1": 1,
+                            "title": "@title",
+                            "content": "<img src=@image('200x100', '#FF6600') /><p></p>@paragraph(50)<p></p><img src=@image />",
+                            "reward|1-20": 1,
+                            "dateTime": "@date('yyyy-MM-dd HH:mm:ss')"
+                        }
+                    ]
+                }
+            }
+        },
+
+        {
+            "url": "/admin/userLog/list",
+            "desc": "获取用户信息",
+            "mock": true,
+            "res": {
+                "code": 200,
+                "msg": "Get address successfully.",
+                "data": {
+                    "pageSize":10,
+                    "pageNo":3,
+                    "totalCount":52,
+                    "items|5-10": [
+                        {
+                            "userId|+1": 1,
+                            "userName": "@cname()",
+                            "roleKey": "@pick(1)",
+                            "translateCount|1-20": 1,
+                            "overtimeCount|1-20": 1,
+                            "createdDate": "@date('yyyy-MM-dd HH:mm:ss')"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "url": "/",
+            "desc": "Index",
+            "mock": true,
+            "res": {
+                "code": 200,
+                "msg": "Hi, this is mock server.",
+                "data": ""
+            }
+        }
+    ]
+}
+
+
+
+
+
+
