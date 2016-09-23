@@ -55,6 +55,6 @@
 
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/TCL-MIG-FE/react-web-spa-startkit.git"
+        "url": "git+https://github.com/TCL-MIG-FE/vue-web-spa-startkit.git"
     }
 }
