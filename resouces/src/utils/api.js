@@ -15,7 +15,8 @@ const METHODS = {
 const request = (url, params, method = METHODS.GET, jsonType = false) => {
     var options = {
         headers: {
-            'Content-Type': jsonType ? 'application/json' : 'application/x-www-form-urlencoded'
+            'Content-Type': jsonType ? 'application/json;charset=UTF-8' : 'application/x-www-form-urlencoded',
+            'Accept': 'text/javascript,*/*'
         },
         method: method,
         credentials: 'include'
@@ -23,7 +24,9 @@ const request = (url, params, method = METHODS.GET, jsonType = false) => {
     if (method !== METHODS.GET && !isEmpty(params)) {
         options.body = jsonType ? JSON.stringify(params) : qs.stringify(params)
     } else if (method === METHODS.GET && !isEmpty(params)) {
-        url += ('?' + qs.stringify(params));
+        const newParams = ( ~url.lastIndexOf('?') ? '&' : '?' ) + qs.stringify(params);
+        url += newParams;
+
     }
     return fetch(url, options).then(checkRespStatus);
 };
@@ -32,8 +35,10 @@ const post = (url, params) => request(url, params, METHODS.POST, true);
 
 // check resp status
 const checkRespStatus = (respPromise) => {
-    if (respPromise.status !== 200) {
-        return Promise.reject('Server error occurred');
+    if (respPromise.status === 403) {
+        // 后台session过期。passport会返回invalidSession，同时status为403
+        window.location.reload();
+        return;
     }
     return respPromise.json().then(resp => {
         return new Promise((resolve, reject) => {
