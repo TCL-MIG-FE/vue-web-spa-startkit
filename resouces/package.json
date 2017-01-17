@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "VUE-SPA-PROJECT",
   "version": "1.0.0",
   "description": "VUE PROJECT BASED ON VUE+VUEX+ELEMENT-UI",
@@ -56,4 +57,64 @@
     "type": "git",
     "url": "git+https://github.com/TCL-MIG-FE/react-web-spa-startkit.git"
   }
+=======
+    "name": "VUE-SPA-PROJECT",
+    "version": "1.0.0",
+    "description": "VUE PROJECT BASED ON VUE+VUEX+ELEMENT-UI",
+    "main": "index.js",
+    "scripts": {
+        "start": "run-p start_dev mock",
+        "start_dev": "webpack-dev-server --inline --hot --host 0.0.0.0 --port 3000 --devtool source-maps --progress --colors --content-base .",
+        "build": "cross-env  NODE_ENV=production webpack --progress --colors",
+        "mock": "node ./mock-server/server.js 2618"
+    },
+    "license": "MIT",
+    "devDependencies": {
+        "autoprefixer": "^6.3.6",
+        "autoprefixer-loader": "^3.2.0",
+        "babel-core": "^6.3.26",
+        "babel-loader": "^6.2.0",
+        "babel-plugin-component": "^0.4.1",
+        "babel-plugin-transform-runtime": "^6.3.13",
+        "babel-preset-es2015": "^6.3.13",
+        "babel-preset-react": "^6.3.13",
+        "babel-preset-stage-0": "^6.3.13",
+        "babel-runtime": "^6.3.19",
+        "cross-env": "^1.0.8",
+        "css-loader": "^0.23.1",
+        "express": "^4.13.4",
+        "extract-text-webpack-plugin": "^1.0.1",
+        "file-loader": "^0.8.4",
+        "html-webpack-plugin": "^2.10.0",
+        "less": "^2.6.1",
+        "less-loader": "^2.2.2",
+        "mockjs": "^1.0.1-beta2",
+        "npm-run-all": "^2.3.0",
+        "url-loader": "^0.5.7",
+        "vue-hot-reload-api": "^2.0.6",
+        "vue-html-loader": "^1.2.3",
+        "vue-loader": "^9.4.2",
+        "vue-style-loader": "^1.0.0",
+        "vuex-router-sync": "^3.0.0",
+        "webpack": "^1.12.14",
+        "webpack-dev-server": "^1.14.1",
+        "webpack-md5-hash": "0.0.5"
+    },
+    "dependencies": {
+        "classnames": "^2.2.5",
+        "element-ui": "^1.0.0-rc.3",
+        "es6-promise": "^3.2.1",
+        "lodash.isempty": "^4.4.0",
+        "vue": "^2.0.0-rc.6",
+        "vue-router": "^2.0.0-rc.5",
+        "vuex": "^2.0.0-rc.5",
+        "vuex-router-sync": "^3.0.0",
+        "whatwg-fetch": "^1.0.0"
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/TCL-MIG-FE/vue-web-spa-startkit.git"
+    }
+>>>>>>> 5693e1f184cd6106cf5f35f2e0a4769db9be7a74
 }
