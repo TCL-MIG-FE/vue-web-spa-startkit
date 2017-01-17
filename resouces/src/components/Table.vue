@@ -58,3 +58,9 @@
         },
     }
 </script>
+
+<style>
+    .table-wrapper{
+        clear:both;
+    }
+</style>

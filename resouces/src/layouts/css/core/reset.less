@@ -1,9 +1,15 @@
+/** element-ui的对话框会给body增加样式，导致导航栏右侧出现空白 **/
+body{
+    padding-right:0 !important;
+}
 
+/** 解决element-ui中表格有复选框是，选择按钮不居中的问题 **/
 .el-checkbox__input .el-checkbox__inner::after {
     top: 3px;
     left: 6px;
 }
 
+/** 限制element-ui的tooltip宽度**/
 .el-tooltip__popper {
     width: 400px !important;
 
@@ -13,12 +19,41 @@
     }
 }
 
+/** 调整对话框大小 **/
 .el-dialog--large {
     min-width: 900px;
     top: 20px !important;
 }
 
+/** 调整element-ui的消息提示，免得文字超长时比较难看 **/
 .el-message__group p {
     white-space: normal;
     text-align: initial;
+}
+
+/** element-ui的分页跳转处理，显示为英文，隐藏中文 **/
+span.el-pagination__jump{
+    font-size:0;
+    position:relative;
+    margin-left: 30px;
+    &:before{
+        width: 20px;
+        height: 20px;
+        top: 0;
+        left: -20px;
+        font-size:13px;
+        position: absolute;
+        content: 'Go';
+    }
+
+    input{
+        font-size:13px;
+        width:35px !important;
+    }
+}
+
+
+/** 当下拉框位于dialog的footer中时，下拉框无法显示出来 **/
+.el-select-dropdown{
+    z-index:1100 !important;
 }

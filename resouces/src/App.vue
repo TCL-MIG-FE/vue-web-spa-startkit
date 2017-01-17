@@ -3,20 +3,23 @@
         <loading-indicator :showing='pageLoading'></loading-indicator>
         <header className="page-header">
             <div class="logo">
-                管理后台
+                WEMEDIA DASHBOARD
             </div>
             <ul class="nav">
                 <li :class="{active: this.$route.path == '/tasks'}">
-                    <router-link to="/tasks">任务管理</router-link>
+                    <router-link to="/tasks">TASK MANAGEMENT</router-link>
                 </li>
-                <li :class="{active: this.$route.path == '/approval'}">
-                    <router-link to="/approval">翻译审核</router-link>
+                <li :class="{active: this.$route.path == '/translator/approval'}">
+                    <router-link to="/translator/approval">TRANSLATION MANAGEMENT</router-link>
+                </li>
+                <li :class="{active: this.$route.path == '/community/approval'}">
+                    <router-link to="/community/approval">ARTICLE MANAGEMENT</router-link>
                 </li>
                 <li :class="{active: this.$route.path == '/userManager'}">
-                    <router-link to="/userManager">用户管理</router-link>
+                    <router-link to="/userManager">USER MANAGEMENT</router-link>
                 </li>
                 <li :class="{active: this.$route.path == '/settings'}">
-                    <router-link to="/settings">设置</router-link>
+                    <router-link to="/settings">SETTINGS</router-link>
                 </li>
             </ul>
 

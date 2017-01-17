@@ -1,5 +1,11 @@
 <template>
     <div class='users-section'>
+        <div class="pull-right mb10">
+            <el-select class="mr5 inline-block vb" v-model='status' @change="onStatusChanged"
+                       placeholder='Please choose'>
+                <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
+            </el-select>
+        </div>
         <div v-if='users.totalCount > 0'>
             <wm-table
                 @onPagination="onPagination"
@@ -8,17 +14,16 @@
                 :pageNo="users.pageNo"
                 :pageSize="users.pageSize"
                 :total="users.totalCount">
-                <el-table-column label="用户名" property="userName" />
-                <el-table-column label="用户类型"  inline-template>
-                    <span v-if='row.roleKey == 1'>翻译用户</span>
+                <el-table-column label="User" property="userName"/>
+                <el-table-column label="Role" property="roleKey">
                 </el-table-column>
-                <el-table-column label="翻译文章数"  property='translateCount' />
-                <el-table-column label="超时任务数"  property='overtimeCount' />
-                <el-table-column label="注册时间"  property='createdDate' />
+                <el-table-column label="Completed Tasks" property='translateCounts'/>
+                <el-table-column label="Timeout Tasks" property='overtimeCount'/>
+                <el-table-column label="Registration Time" property='createTime'/>
             </wm-table>
         </div>
         <div v-else>
-            <span>没有任何数据</span>
+            <span>No users are available</span>
         </div>
     </div>
 </template>
@@ -26,6 +31,7 @@
 <script>
     import {mapActions, mapState} from 'vuex'
     import WmTable from '../components/Table'
+    import {TRANSLATED_USER_ROLE, COMMUNITY_USER_ROLE} from '../constants/api'
 
     export default {
 
@@ -33,6 +39,17 @@
 
         components: {
             WmTable,
+        },
+
+        data(){
+            return {
+                status: '',
+                options:[
+                    {label:'Translator Users', value:TRANSLATED_USER_ROLE},
+                    {label:'Community Users', value:COMMUNITY_USER_ROLE}
+                ]
+            }
+
         },
 
 
@@ -50,9 +67,15 @@
 
             refreshPage(otherParams = {}){
                 this.showPageLoading();
-                this.getUsers(otherParams).then(()=> {
+                const status = this.status;
+                this.getUsers({ status, ...otherParams}).then(()=> {
                     this.hidePageLoading();
                 });
+            },
+
+            onStatusChanged( status ){
+                this.status = status;
+                this.refreshPage({pageNo:1});
             },
 
 
@@ -65,6 +88,12 @@
         },
 
     };
+
+
+
+
+
+
 </script>
 
 

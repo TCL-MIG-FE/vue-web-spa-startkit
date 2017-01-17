@@ -16,7 +16,6 @@ Vue.config.errorHandler = function (err, vm) {
 
 export default new Vuex.Store({
     actions,
-    mutations,
     modules: mutations,
     strict: !__DEV__,
 })

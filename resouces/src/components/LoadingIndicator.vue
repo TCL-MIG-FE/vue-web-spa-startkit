@@ -18,9 +18,6 @@
                 type: Boolean,
                 default: false
             }
-        },
-        mounted(){
-            console.log("loading show....")
         }
     }
 </script>

@@ -1,4 +1,4 @@
-import {APPROVAL_List, APPROVAL_ACCEPTED, APPROVAL_REJECTED, ARTICLE_VIEW} from "../constants/api";
+import {APPROVAL_LIST, APPROVAL_ACCEPTED, APPROVAL_REJECTED, ARTICLE_VIEW} from "../constants/api";
 
 const state = {
     approvalsList: {
@@ -8,11 +8,11 @@ const state = {
         totalCount: 0
     },
     
-    translatedArticle: ''
+    translatedArticle: {}
 };
 const mutations = {
     
-    [APPROVAL_List](state, {payload}){
+    [APPROVAL_LIST](state, {payload}){
         state.approvalsList = payload;
     },
     
@@ -28,7 +28,7 @@ const mutations = {
     
     
     [ARTICLE_VIEW](state, {payload}){
-        state.translatedArticle = payload;
+        state.translatedArticle = payload || {} ;
     },
     
 };

@@ -1,4 +1,4 @@
-import {TASK_LIST, TASKS_PUBLISH, TASKS_UNPUBLISH} from "../constants/api";
+import {TASK_LIST, TASKS_PUBLISH, TASKS_UNPUBLISHED, UN_PUBLISHED, PUBLISHED} from "../constants/api";
 
 const state = {
     tasksList: {
@@ -15,21 +15,37 @@ const mutations = {
         state.tasksList.pageNo = payload.pageNo;
     },
     
-    [TASKS_PUBLISH](state, action){
-        const taskIds = action.meta.taskIds;
+    [TASKS_PUBLISH](state, {meta:{processIds, reserveRecord}}){
         const items = state.tasksList.items;
-        state.tasksList.items = items.filter(item => {
-            return !taskIds.some(taskId => taskId == item.processId);
-        })
+        if( reserveRecord ){
+            state.tasksList.items = items.map( item =>{
+                processIds.forEach( processId =>{
+                    processId == item.processId && ( item.status = PUBLISHED);
+                });
+                return item;
+            })
+        }else{
+            state.tasksList.items = items.filter(item => {
+                return !processIds.some(processId => processId == item.processId);
+            })
+        }
+ 
     },
     
-    [TASKS_UNPUBLISH](state, action){
-        debugger;
-        const taskIds = action.meta.taskIds;
+    [TASKS_UNPUBLISHED](state, {meta:{processIds, reserveRecord}}){
         const items = state.tasksList.items;
-        state.tasksList.items = items.filter(item => {
-            return !taskIds.some(taskId => taskId == item.processId);
-        })
+        if( reserveRecord ){
+            state.tasksList.items = items.map( item =>{
+                processIds.forEach( processId =>{
+                    processId == item.processId && ( item.status = UN_PUBLISHED);
+                });
+                return item;
+            })
+        }else{
+            state.tasksList.items = items.filter(item => {
+                return !processIds.some(processId => processId == item.processId);
+            })
+        }
     }
 };
 

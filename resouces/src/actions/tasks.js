@@ -1,7 +1,7 @@
-import {TASK_LIST, TASKS_PUBLISH} from "../constants/api";
+import {TASK_LIST, TASKS_PUBLISH, TASKS_UNPUBLISHED} from "../constants/api";
 import Api, {createAction} from "../utils/api";
 
-const metaCreator = ({processIds}) =>({taskIds: processIds.split(',')});
+const metaCreator = ({processIds, reserveRecord}) =>({processIds: processIds.split(','), reserveRecord});
 
 export default {
     
@@ -9,6 +9,6 @@ export default {
     
     publishTasks: createAction(TASKS_PUBLISH, Api.publishTasks, metaCreator),
     
-    unPublishTasks: createAction(TASKS_PUBLISH, Api.unPublishTasks, metaCreator),
+    unPublishTasks: createAction(TASKS_UNPUBLISHED, Api.unPublishTasks, metaCreator),
     
 }

@@ -8,9 +8,9 @@
                 "code": 200,
                 "msg": "Get address successfully.",
                 "data": {
-                    "pageSize":10,
-                    "pageNo":2,
-                    "totalCount":92,
+                    "pageSize": 10,
+                    "pageNo": 2,
+                    "totalCount": 92,
                     "items|5-10": [
                         {
                             "processId|+1": 1,
@@ -34,22 +34,23 @@
                 "data": {
                     "processId|+1": 1,
                     "title": "@cword(20)",
-                    "content": "@cword(900)"
+                    "translateTitle": "@cword(20)",
+                    "content": "@cword(900)<img src=@image('200x100', '#FF6600') />",
+                    "translateContent": "@cword(900)<img src=@image('200x100', '#FF6600') />"
                 }
             }
         },
-
         {
-            "url": "/admin/verify/list",
+            "url": "/admin/approving/list",
             "desc": "获取翻译审核列表",
             "mock": true,
             "res": {
                 "code": 200,
                 "msg": "Get address successfully.",
                 "data": {
-                    "pageSize":10,
-                    "pageNo":3,
-                    "totalCount":52,
+                    "pageSize": 10,
+                    "pageNo": 3,
+                    "totalCount": 52,
                     "items|5-10": [
                         {
                             "processId|+1": 1,
@@ -62,7 +63,44 @@
                 }
             }
         },
-
+        {
+            "url": "/admin/community/list",
+            "desc": "获取社区用户审核列表",
+            "mock": true,
+            "res": {
+                "code": 200,
+                "msg": "Get address successfully.",
+                "data": {
+                    "pageSize": 10,
+                    "pageNo": 3,
+                    "totalCount": 52,
+                    "items|5-10": [
+                        {
+                            "processId|+1": 1,
+                            "title": "@title",
+                            "content": "<img src=@image('200x100', '#FF6600') /><p></p>@paragraph(50)<p></p><img src=@image />",
+                            "author": "@cname()",
+                            "dateTime": "@date('yyyy-MM-dd HH:mm:ss')"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "url": "/admin/community/view",
+            "desc": "获取社区的文章",
+            "mock": true,
+            "res": {
+                "code": 200,
+                "msg": "Get address successfully.",
+                "data": {
+                    "processId|+1": 1,
+                    "title": "@cword(20)",
+                    "categoryCode": "100000015",
+                    "content": "@cword(900)<img src=@image('200x100', '#FF6600') />"
+                }
+            }
+        },
         {
             "url": "/admin/userLog/list",
             "desc": "获取用户信息",
@@ -71,20 +109,46 @@
                 "code": 200,
                 "msg": "Get address successfully.",
                 "data": {
-                    "pageSize":10,
-                    "pageNo":3,
-                    "totalCount":52,
+                    "pageSize": 10,
+                    "pageNo": 3,
+                    "totalCount": 52,
                     "items|5-10": [
                         {
                             "userId|+1": 1,
                             "userName": "@cname()",
-                            "roleKey": "@pick(1)",
-                            "translateCount|1-20": 1,
+                            "roleKey": "@pick('翻译用户','其他用户')",
+                            "translateCounts|1-20": 1,
                             "overtimeCount|1-20": 1,
-                            "createdDate": "@date('yyyy-MM-dd HH:mm:ss')"
+                            "createTime": "@date('yyyy-MM-dd HH:mm:ss')"
                         }
                     ]
                 }
+            }
+        },
+        {
+            "url": "/admin/category/list",
+            "desc": "获取文章分类信息",
+            "mock": true,
+            "res": {
+                "code": 200,
+                "msg": "Get address successfully.",
+                "data": [
+                    {
+                        "categoryCode": "100000001",
+                        "categoryName": "recommend",
+                        "description": "Recommend"
+                    },
+                    {
+                        "categoryCode": "100000015",
+                        "categoryName": "BijXhHjx",
+                        "description": "Reality"
+                    },
+                    {
+                        "categoryCode": "100000005",
+                        "categoryName": "Политика",
+                        "description": "Politics"
+                    }
+                ]
             }
         },
         {

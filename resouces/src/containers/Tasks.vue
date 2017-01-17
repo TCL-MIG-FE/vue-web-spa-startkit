@@ -1,61 +1,68 @@
 <template>
     <div class='tasks-section'>
-        <div v-if='tasks.totalCount > 0'>
-            <div class="pull-right mb10">
-                <el-select class="mr5 inline-block" v-model='status' @change="onStatusChanged">
-                    <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
-                </el-select>
-                <el-button v-if="status == statusItems.UN_PUBLISHED"
-                           @click.native="doPublish(selectedTaskIds)"
-                           :disabled="!selectedTaskIds"
-                           type="primary">发布
-                </el-button>
 
-                <el-button v-if="status == statusItems.PUBLISHED"
-                           @click.native="doUnPublish(selectedTaskIds)"
-                           :disabled="!selectedTaskIds"
-                           type="primary">撤销
-                </el-button>
+        <div class="pull-right mb10">
+            <el-select class="mr5 inline-block vb" v-model='status' @change="onStatusChanged">
+                <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
+            </el-select>
+            <el-button v-if="status == statusItems.UN_PUBLISHED"
+                       @click.native="doPublish(selectedTaskIds)"
+                       :disabled="!selectedTaskIds"
+                       type="primary">Publish
+            </el-button>
+
+            <el-button v-if="status == statusItems.PUBLISHED"
+                       @click.native="doUnPublish(selectedTaskIds)"
+                       :disabled="!selectedTaskIds"
+                       type="primary">Withdraw
+            </el-button>
+        </div>
+        <wm-table @onSelected="onSelected"
+                  @onPagination="onPagination"
+                  :source="tasks.items"
+                  :pageNo="tasks.pageNo"
+                  :pageSize="tasks.pageSize"
+                  :total="tasks.totalCount">
+            <el-table-column type="selection" width="50"></el-table-column>
+            <el-table-column label="Title" property="title" show-tooltip-when-overflow/>
+            <el-table-column label="Source" property="source" show-tooltip-when-overflow/>
+            <el-table-column label="Awards" width="120" inline-template>
+                <span>${{row.reward}}</span>
+            </el-table-column>
+            <el-table-column  label="Status" property="status" width="120" inline-template>
+                    <span>
+                        <span v-if="row.status == $parent.statusItems.UN_PUBLISHED">Unpublished</span>
+                        <span v-if="row.status == $parent.statusItems.PUBLISHED">Published</span>
+                        <span v-if="row.status == $parent.statusItems.HAVE_ACCEPTED">Accepted</span>
+                    </span>
+            </el-table-column>
+            <el-table-column  label="Operation" inline-template width="180" align='center'>
+                    <span>
+                        <el-button size="small" @click.native="$parent.showArticle(row)" type='info'>View</el-button>
+                        <el-button v-if="row.status == $parent.statusItems.UN_PUBLISHED" type="success" size="small"
+                                   @click.native="$parent.doPublish(row.processId)">Publish
+                        </el-button>
+                        <el-button v-if="row.status == $parent.statusItems.PUBLISHED" type="danger" size="small"
+                                   @click.native="$parent.doUnPublish(row.processId)">Withdraw
+                        </el-button>
+                    </span>
+            </el-table-column>
+        </wm-table>
+
+        <el-dialog title="Article Content" v-model="isArticleVisible" size="large" :close-on-click-modal="false">
+            <div class='article-wrapper clearfix'>
+                <!-- 原文 -->
+                <div class='article'>
+                    <h2 class='title' :title='article.title' v-html='article.title'></h2>
+                    <div class='content' v-html='article.content'></div>
+                </div>
             </div>
-            <wm-table @onSelected="onSelected"
-                      @onPagination="onPagination"
-                      :source="tasks.items"
-                      :pageNo="tasks.pageNo"
-                      :pageSize="tasks.pageSize"
-                      :total="tasks.totalCount">
-                <el-table-column type="selection" width="50"></el-table-column>
-                <el-table-column label="文章标题" property="title" show-tooltip-when-overflow/>
-                <el-table-column label="二级源" property="source" show-tooltip-when-overflow />
-                <el-table-column label="内容详情" show-tooltip-when-overflow inline-template>
-                    <span>
-                        <span v-if='row.content.length <= MAX_CONTENTS_LENGTH'>{{row.content}}</span>
-                        <span v-else>{{ row.content.substring(0,MAX_CONTENTS_LENGTH) + ' ...' }}</span>
-                    </span>
-                </el-table-column>
-                <el-table-column label="赏金" property="reward" width="80"/>
-                <el-table-column label="状态" property="status" width="80" inline-template>
-                    <span>
-                        <span v-if="row.status == statusItems.UN_PUBLISHED">未发布</span>
-                        <span v-if="row.status == statusItems.PUBLISHED">已发布</span>
-                        <span v-if="row.status == statusItems.HAVE_ACCEPTED">已领取</span>
-                    </span>
-                </el-table-column>
-                <el-table-column label="操作" inline-template width="100">
-                    <span>
-                        <el-button v-if="row.status == statusItems.UN_PUBLISHED" type="primary" size="small"
-                                   @click.native="doPublish(row.processId)">发布
-                        </el-button>
-                        <el-button v-if="row.status == statusItems.PUBLISHED" type="primary" size="small"
-                                   @click.native="doUnPublish(row.processId)">撤销
-                        </el-button>
-                    </span>
-                </el-table-column>
-            </wm-table>
-        </div>
-        <div v-else>
-            <span>没有任何数据</span>
-        </div>
+            <span slot="footer" class="dialog-footer">
+                <el-button type="primary" @click.native="isArticleVisible = false">OK</el-button>
+            </span>
+        </el-dialog>
     </div>
+
 </template>
 
 <script>
@@ -76,25 +83,35 @@
         data(){
             return {
                 selectedTaskIds: [],
+
                 // contents显示的最大长度
                 MAX_CONTENTS_LENGTH,
+
                 statusItems: {
                     UN_PUBLISHED,
                     PUBLISHED,
                     HAVE_ACCEPTED
                 },
+
                 status: '',
+
+                // 是否显示文章详情对话框
+                isArticleVisible:false,
+
+                // 要查看的文章
+                article: {},
+
                 options: [{
-                    label: '所有状态',
+                    label: 'All',
                     value: ''
                 }, {
-                    label: '未发布',
+                    label: 'Unpublished',
                     value: UN_PUBLISHED
                 }, {
-                    label: '已发布',
+                    label: 'Published',
                     value: PUBLISHED
                 }, {
-                    label: '已领取',
+                    label: 'Accepted',
                     value: HAVE_ACCEPTED
                 }]
             }
@@ -112,9 +129,15 @@
 
         methods: {
 
+
+            _isShowingAllStatus(){
+                return this.status === '';
+            },
+
+
             doPublish(taskIds){
                 this.showPageLoading();
-                this.publishTasks({processIds: `${taskIds}`}).then(()=> {
+                this.publishTasks({processIds: `${taskIds}`, reserveRecord: this._isShowingAllStatus()}).then(()=> {
                     this.hidePageLoading();
                     this.tasks.items.length == 0 && this.refreshPage();
 
@@ -122,7 +145,7 @@
             },
 
             doUnPublish(taskIds){
-                this.unPublishTasks({processIds: `${taskIds}`}).then(()=> {
+                this.unPublishTasks({processIds: `${taskIds}`, reserveRecord: this._isShowingAllStatus()}).then(()=> {
                     this.hidePageLoading();
                     this.tasks.items.length == 0 && this.refreshPage();
                 });
@@ -152,10 +175,49 @@
 
             },
 
+            showArticle( article){
+                this.isArticleVisible = true;
+                this.article = article;
+            },
+
             ...mapActions(["showPageLoading", "hidePageLoading", "getTasks", "publishTasks", "unPublishTasks"])
         },
 
     };
 </script>
 
+
+<style lang='less' >
+    .article-wrapper {
+        margin-bottom: -10px;
+        .article {
+            border: 1px solid #e0e6ed;
+            border-radius: 4px;
+            padding-top: 15px;
+            position:relative;
+            height: 550px;
+
+            .title {
+                text-align: center;
+                margin-bottom: 10px;
+                padding: 0 15px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .content {
+                overflow-y: auto;
+                padding: 0 15px;
+                height:490px;
+            }
+
+            img{
+                max-width:90%;
+            }
+
+        }
+
+    }
+</style>
 
