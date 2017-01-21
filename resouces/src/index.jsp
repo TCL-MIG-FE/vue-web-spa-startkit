@@ -15,6 +15,7 @@
   </head>
   <body>
     <div id="root"></div>
+    <%=htmlWebpackPlugin.files.webpackManifest%>
     <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
     <script src="<%=htmlWebpackPlugin.options.context%>/static/admin/<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
     <% } %>

@@ -42,6 +42,8 @@
 
     Vue.use(Element);
 
+    console.log(1)
+
     export default {
 
         name: 'App',
