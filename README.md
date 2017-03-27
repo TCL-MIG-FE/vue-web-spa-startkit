@@ -5,7 +5,7 @@
 
 ```bash
 git clone https://github.com/TCL-MIG-FE/vue-web-spa-startkit.git
-cd TCL-MIG-FE/vue-web-spa-startkit && npm install
+cd TCL-MIG-FE/vue-web-spa-startkit/resouces && npm install
 ```
 
 ```bash
