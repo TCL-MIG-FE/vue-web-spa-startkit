@@ -9,7 +9,7 @@ cd TCL-MIG-FE/vue-web-spa-startkit/resouces && npm install
 ```
 
 ```bash
-npm run start           # 开发环境自动编译并开启mock服务,访问http://localhost:4000
+npm run start           # 开发环境自动编译并开启mock服务,访问http://localhost:3000
 npm run build           # 打包到static目录,同时在上级文件夹中生成index.jsp,支持J2EE应用上下文
 ```
 
