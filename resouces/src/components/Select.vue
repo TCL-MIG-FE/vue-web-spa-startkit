@@ -2,7 +2,8 @@
     <el-select v-model="value">
         <el-option
             @change="onChange"
-            v-for="item in options"
+            v-for="item,index in options"
+            :key='index'
             :label="item.label"
             :value="item.value">
         </el-option>

@@ -3,16 +3,17 @@
 
         <div class="pull-right mb10">
             <el-select class="mr5 inline-block vb" v-model='status' @change="onStatusChanged">
-                <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
+                <el-option v-for="item,index in options" :key='index'
+                          :label="item.label" :value="item.value"></el-option>
             </el-select>
             <el-button v-if="status == statusItems.UN_PUBLISHED"
-                       @click.native="doPublish(selectedTaskIds)"
+                       @click="doPublish(selectedTaskIds)"
                        :disabled="!selectedTaskIds"
                        type="primary">Publish
             </el-button>
 
             <el-button v-if="status == statusItems.PUBLISHED"
-                       @click.native="doUnPublish(selectedTaskIds)"
+                       @click="doUnPublish(selectedTaskIds)"
                        :disabled="!selectedTaskIds"
                        type="primary">Withdraw
             </el-button>
@@ -29,23 +30,27 @@
             <el-table-column label="Awards" width="120" inline-template>
                 <span>${{row.reward}}</span>
             </el-table-column>
-            <el-table-column  label="Status" property="status" width="120" inline-template>
+            <el-table-column  label="Status" property="status" width="120">
+                <template scope='props'>
                     <span>
-                        <span v-if="row.status == $parent.statusItems.UN_PUBLISHED">Unpublished</span>
-                        <span v-if="row.status == $parent.statusItems.PUBLISHED">Published</span>
-                        <span v-if="row.status == $parent.statusItems.HAVE_ACCEPTED">Accepted</span>
+                        <span v-if="props.row.status == statusItems.UN_PUBLISHED">Unpublished</span>
+                        <span v-if="props.row.status == statusItems.PUBLISHED">Published</span>
+                        <span v-if="props.row.status == statusItems.HAVE_ACCEPTED">Accepted</span>
                     </span>
+                </template>
             </el-table-column>
-            <el-table-column  label="Operation" inline-template width="180" align='center'>
+            <el-table-column  label="Operation"  width="180" align='center'>
+                <template scope="props">
                     <span>
-                        <el-button size="small" @click.native="$parent.showArticle(row)" type='info'>View</el-button>
-                        <el-button v-if="row.status == $parent.statusItems.UN_PUBLISHED" type="success" size="small"
-                                   @click.native="$parent.doPublish(row.processId)">Publish
+                        <el-button size="small" @click="showArticle(props.row)" type='info'>View</el-button>
+                        <el-button v-if="props.row.status == statusItems.UN_PUBLISHED" type="success" size="small"
+                                   @click.native="doPublish(props.row.processId)">Publish
                         </el-button>
-                        <el-button v-if="row.status == $parent.statusItems.PUBLISHED" type="danger" size="small"
-                                   @click.native="$parent.doUnPublish(row.processId)">Withdraw
+                        <el-button v-if="props.row.status == statusItems.PUBLISHED" type="danger" size="small"
+                                   @click="doUnPublish(props.row.processId)">Withdraw
                         </el-button>
                     </span>
+                </template>
             </el-table-column>
         </wm-table>
 

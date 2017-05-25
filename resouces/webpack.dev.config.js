@@ -46,7 +46,7 @@ var config = {
         new HtmlWebpackPlugin({
             inject: false,
             filename: './index.html',
-            template: path.join(SRC_PATH, 'index.html')
+            template: path.join(SRC_PATH, 'index_dev.html')
         })
 
     ],

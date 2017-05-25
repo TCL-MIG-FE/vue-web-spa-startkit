@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>自媒体管理</title>
+    <% for (var css in htmlWebpackPlugin.files.css) { %>
+    <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% } %>
+  </head>
+  <body>
+  <script>
+      window.config = {
+          currentUser: "flyingzl",
+          context: "http://localhost:2618/api/admin"
+      }
+  </script>
+
+  <div id="root"></div>
+    <%=htmlWebpackPlugin.files.webpackManifest%>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
+    <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
+    <% } %>
+  </body>
+</html>

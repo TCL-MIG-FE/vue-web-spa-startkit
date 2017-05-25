@@ -1,4 +1,4 @@
-import {USERS_LIST, USER_PASSWORD_UPDATED} from "../constants/api";
+import * as C from "../constants/api";
 
 const state = {
     usersList: {
@@ -9,14 +9,14 @@ const state = {
     },
 };
 const mutations = {
-    
-    [USERS_LIST](state, {payload}){
+
+    [C.USERS_LIST](state, {payload}){
         state.usersList = payload || 'anonymous';
     },
-    
-    [USER_PASSWORD_UPDATED](state){
+
+    [C.USER_PASSWORD_UPDATED](state){
     },
-    
+
 };
 
 export default{

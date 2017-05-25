@@ -9,7 +9,7 @@
                     <el-input type='password' auto-complete="off" v-model="user.confirmPwd"></el-input>
                 </el-form-item>
                 <el-form-item class='text-center'>
-                    <el-button class='btn-submit' type="primary" @click.native.prevent="submit">提交</el-button>
+                    <el-button class='btn-submit' type="primary" @click.prevent="submit">提交</el-button>
                 </el-form-item>
             </el-form>
         </div>

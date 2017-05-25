@@ -11,19 +11,19 @@
                 <el-table-column label="Title" property="title" show-tooltip-when-overflow/>
                 <el-table-column label="Author" property="author" width="120"/>
                 <el-table-column label="Creation Time" width="180" property="dateTime"/>
-                <el-table-column label="Operation" inline-template width='280' align="center">
-                    <span>
+                <el-table-column label="Operation"  width='280' align="center">
+                    <template scope="props">
                         <el-button type="info" class="mr10" size="small"
-                                   @click.native="$parent.showCommunityArticle(row.processId)">
+                                   @click="showCommunityArticle(props.row.processId)">
                             View
                         </el-button>
-                        <el-button type="success" class="mr10" size="small" @click.native="$parent.doAccept(row.processId)">
+                        <el-button type="success" class="mr10" size="small" @click="doAccept(props.row.processId)">
                             Accept
                         </el-button>
-                        <el-button type="danger" size="small" @click.native="$parent.doReject(row.processId)">
+                        <el-button type="danger" size="small" @click="doReject(props.row.processId)">
                             Refuse
                         </el-button>
-                    </span>
+                    </template>
                 </el-table-column>
             </wm-table>
         </div>
@@ -41,10 +41,12 @@
             <span slot="footer" class="dialog-footer">
                 <strong>Category</strong>:
                 <el-select class="ml5 mr5 inline-block vb" v-model='articleCategoryCode' placeholder='Please choose'>
-                    <el-option v-for="item in articleCategories" :label="item.categoryName"
+                    <el-option v-for="item,index in articleCategories"
+                                :key="index"
+                                :label="item.categoryName"
                                :value="item.categoryCode"></el-option>
                 </el-select>
-                <el-button type="primary" @click.native="applyCategoryCode">OK</el-button>
+                <el-button type="primary" @click="applyCategoryCode">OK</el-button>
             </span>
         </el-dialog>
     </div>

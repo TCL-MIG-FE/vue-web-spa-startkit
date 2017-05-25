@@ -4,7 +4,7 @@
             :data="source"
             :selection-mode="mode"
             :border="true"
-            @selectionchange="onSelected">
+            @selection-change="onSelected">
             <slot></slot>
         </el-table>
 
@@ -12,7 +12,7 @@
             ref="pagination"
             class="mt30 text-center"
             layout="prev, pager, next,jumper"
-            @currentchange="onPagination"
+            @current-change="onPagination"
             :current-page="pageNo"
             :page-size="pageSize"
             :total="total">

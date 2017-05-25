@@ -43,6 +43,7 @@ export const COMMUNITY_ARTICLE_CATEGORY = getApi('category/list');
 export const COMMUNITY_ARTICLE_CATEGORY_APPLIED = getApi('community/category');
 
 export const USERS_LIST = getApi('userLog/list');
+export const USER_PASSWORD_UPDATED = getApi('user/updatePwd');
 
 
 

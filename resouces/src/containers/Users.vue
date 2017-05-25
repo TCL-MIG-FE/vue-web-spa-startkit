@@ -3,7 +3,7 @@
         <div class="pull-right mb10">
             <el-select class="mr5 inline-block vb" v-model='status' @change="onStatusChanged"
                        placeholder='Please choose'>
-                <el-option v-for="item in options" :label="item.label" :value="item.value"></el-option>
+                <el-option v-for="item,index in options" :key='index' :label="item.label" :value="item.value"></el-option>
             </el-select>
         </div>
         <div v-if='users.totalCount > 0'>

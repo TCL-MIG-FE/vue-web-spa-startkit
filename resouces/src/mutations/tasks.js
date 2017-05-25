@@ -1,4 +1,4 @@
-import {TASK_LIST, TASKS_PUBLISH, TASKS_UNPUBLISHED, UN_PUBLISHED, PUBLISHED} from "../constants/api";
+import * as C from "../constants/api";
 
 const state = {
     tasksList: {
@@ -9,18 +9,18 @@ const state = {
     }
 };
 const mutations = {
-    
-    [TASK_LIST](state, {payload}){
+
+    [C.TASK_LIST](state, {payload}){
         state.tasksList = payload;
         state.tasksList.pageNo = payload.pageNo;
     },
-    
-    [TASKS_PUBLISH](state, {meta:{processIds, reserveRecord}}){
+
+    [C.TASKS_PUBLISH](state, {meta:{processIds, reserveRecord}}){
         const items = state.tasksList.items;
         if( reserveRecord ){
             state.tasksList.items = items.map( item =>{
                 processIds.forEach( processId =>{
-                    processId == item.processId && ( item.status = PUBLISHED);
+                    processId == item.processId && ( item.status = C.PUBLISHED);
                 });
                 return item;
             })
@@ -29,15 +29,15 @@ const mutations = {
                 return !processIds.some(processId => processId == item.processId);
             })
         }
- 
+
     },
-    
-    [TASKS_UNPUBLISHED](state, {meta:{processIds, reserveRecord}}){
+
+    [C.TASKS_UNPUBLISHED](state, {meta:{processIds, reserveRecord}}){
         const items = state.tasksList.items;
         if( reserveRecord ){
             state.tasksList.items = items.map( item =>{
                 processIds.forEach( processId =>{
-                    processId == item.processId && ( item.status = UN_PUBLISHED);
+                    processId == item.processId && ( item.status = C.UN_PUBLISHED);
                 });
                 return item;
             })

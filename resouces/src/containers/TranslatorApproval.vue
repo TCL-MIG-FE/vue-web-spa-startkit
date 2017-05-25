@@ -10,22 +10,22 @@
                 :total="approvals.totalCount">
                 <el-table-column label="Title" property="title" show-tooltip-when-overflow/>
                 <el-table-column label="Finish Time" property="dateTime" width="180"/>
-                <el-table-column label="Awards" width="100" inline-template>
-                    <span>${{row.reward}}</span>
+                <el-table-column label="Awards" width="100">
+                    <template scope='props'>${{props.row.reward}}</template>
                 </el-table-column>
-                <el-table-column label="Operation" inline-template width='250' align="center">
-                    <span>
+                <el-table-column label="Operation" width='250' align="center">
+                    <template scope='props'>
                         <el-button type="info" class="mr10" size="small"
-                                   @click.native="$parent.showTranslatedArticle(row.processId)">
+                                   @click="showTranslatedArticle(props.row.processId)">
                             View
                         </el-button>
-                        <el-button type="success" class="mr10" size="small" @click.native="$parent.doAccept(row.processId)">
+                        <el-button type="success" class="mr10" size="small" @click="doAccept(props.row.processId)">
                             Accept
                         </el-button>
-                        <el-button type="danger" size="small" @click.native="$parent.doReject(row.processId)">
+                        <el-button type="danger" size="small" @click="doReject(props.row.processId)">
                             Refuse
                         </el-button>
-                    </span>
+                    </template>
                 </el-table-column>
             </wm-table>
         </div>

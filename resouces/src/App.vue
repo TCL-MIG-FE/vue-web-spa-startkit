@@ -3,23 +3,23 @@
         <loading-indicator :showing='pageLoading'></loading-indicator>
         <header className="page-header">
             <div class="logo">
-                WEMEDIA DASHBOARD
+                自媒体后台管理
             </div>
             <ul class="nav">
                 <li :class="{active: this.$route.path == '/tasks'}">
-                    <router-link to="/tasks">TASK MANAGEMENT</router-link>
+                    <router-link to="/tasks">任务管理</router-link>
                 </li>
                 <li :class="{active: this.$route.path == '/translator/approval'}">
-                    <router-link to="/translator/approval">TRANSLATION MANAGEMENT</router-link>
+                    <router-link to="/translator/approval">翻译管理</router-link>
                 </li>
                 <li :class="{active: this.$route.path == '/community/approval'}">
-                    <router-link to="/community/approval">ARTICLE MANAGEMENT</router-link>
+                    <router-link to="/community/approval">文章管理</router-link>
                 </li>
                 <li :class="{active: this.$route.path == '/userManager'}">
-                    <router-link to="/userManager">USER MANAGEMENT</router-link>
+                    <router-link to="/userManager">用户管理</router-link>
                 </li>
                 <li :class="{active: this.$route.path == '/settings'}">
-                    <router-link to="/settings">SETTINGS</router-link>
+                    <router-link to="/settings">设置</router-link>
                 </li>
             </ul>
 
@@ -41,8 +41,6 @@
     import LoadingIndicator from './components/LoadingIndicator'
 
     Vue.use(Element);
-
-    console.log(1)
 
     export default {
 

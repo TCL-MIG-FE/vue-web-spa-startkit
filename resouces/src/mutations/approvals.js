@@ -1,4 +1,4 @@
-import {APPROVAL_LIST, APPROVAL_ACCEPTED, APPROVAL_REJECTED, ARTICLE_VIEW} from "../constants/api";
+import * as C from "../constants/api";
 
 const state = {
     approvalsList: {
@@ -7,30 +7,30 @@ const state = {
         pageNo: 1,
         totalCount: 0
     },
-    
+
     translatedArticle: {}
 };
 const mutations = {
-    
-    [APPROVAL_LIST](state, {payload}){
+
+    [C.APPROVAL_LIST](state, {payload}){
         state.approvalsList = payload;
     },
-    
-    [APPROVAL_ACCEPTED](state, {meta:{processId}}){
+
+    [C.APPROVAL_ACCEPTED](state, {meta:{processId}}){
         const items = state.approvalsList.items;
         state.approvalsList.items = items.filter(item => item.processId !== processId);
     },
-    
-    [APPROVAL_REJECTED](state, {meta:{processId}}){
+
+    [C.APPROVAL_REJECTED](state, {meta:{processId}}){
         const items = state.approvalsList.items;
         state.approvalsList.items = items.filter(item => item.processId !== processId);
     },
-    
-    
-    [ARTICLE_VIEW](state, {payload}){
+
+
+    [C.ARTICLE_VIEW](state, {payload}){
         state.translatedArticle = payload || {} ;
     },
-    
+
 };
 
 export default{
